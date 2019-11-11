@@ -59,5 +59,3 @@ typings/
 
 # next.js build output
 .next
-server/controllers/Providers.js
-server/models/Providers.js
