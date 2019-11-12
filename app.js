@@ -1,8 +1,8 @@
-import "@babel/polyfill";
+import '@babel/polyfill';
 import express from 'express';
 import dotenv from 'dotenv';
 import router from './server/routes/index';
-import connection from './server/connection';
+import connection from './server/db/connection';
 
 dotenv.config();
 
@@ -23,14 +23,14 @@ app.get('/', (req, res) => {
 
 // wrong route
 app.use((req, res) => res.status(405).send({
-    "status": 405,
-    "error": "This URL does not exist"
+    'status': 405,
+    'error': 'This URL does not exist'
 }));
 
 // server down
 app.use((req, res) => res.status(500).send({
-    "status": 500,
-    "error": "Oops! The problem is not on your side. Hang on, we will fix this soon"
+    'status': 500,
+    'error': 'Oops! The problem is not on your side. Hang on, we will fix this soon'
 }));
 
 app.listen(PORT,database_ip); 
