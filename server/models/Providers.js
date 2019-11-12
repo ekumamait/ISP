@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
-// import { defaultCipherList } from 'constants';
 
 const Schema = mongoose.Schema;
 

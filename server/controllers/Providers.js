@@ -1,5 +1,4 @@
 import Provider from './../models/Providers';
-import connection from './../connection';
 
 class Providers {  
   /**
@@ -46,7 +45,7 @@ class Providers {  
       return res.status(400).send(
         { 
           status: 400,
-          message: 'Oops failed to fetch providers',
+          message: 'Oops failed to fetch all providers',
           error
         });
     }
@@ -59,8 +58,8 @@ class Providers {  
    * @returns {object} Provider object
    */
   static async getOneProvider(req, res) {
-    const data = await Provider.findById(req.params.id)
     try {     
+      const data = await Provider.findById(req.params.id)
       return res.status(200).send(
         { 
           status: 200,
@@ -71,7 +70,7 @@ class Providers {  
     } catch(error) {
       return res.status(400).send({ 
           status: 400,
-          message: 'Oops failed to fetch all providers',
+          message: 'Oops failed to fetch that provider',
           error
     })
     }
@@ -85,8 +84,12 @@ class Providers {  
    */
   static async updateProvider(req, res) {
     try {
-      const data = new Provider(req.body);
-      await data.updateOne(req.params.id)
+      const data = req.body;
+      await Provider.findOneAndUpdate({
+              _id: req.params.id
+        }, 
+        data
+        );
       return res.status(200).send({ 
         status: 200,
         message: 'Provider updated succefully',
@@ -112,8 +115,7 @@ class Providers {  
       await Provider.deleteOne(req.params.id)
       return res.status(200).send({ 
         status: 200,
-        message: 'Provider deteled succefully',
-        data: [] 
+        message: 'Provider deteled succefully'
 });
     } catch(error) {
       return res.status(400).send({ 
